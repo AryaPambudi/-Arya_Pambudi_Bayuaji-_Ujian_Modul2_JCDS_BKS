@@ -1,0 +1,21 @@
+1.
+SELECT name AS country_name, Region AS region, IndepYear AS indep_year
+FROM country
+WHERE Continent = 'Asia' AND IndepYear IS NOT NULL
+ORDER BY IndepYear
+LIMIT 3;
+
+2. 
+SELECT name AS country_name, ((GNP - GNPOld)/GNPOld) AS gnp_growth
+FROM country
+WHERE Continent = 'Europe'
+ORDER BY gnp_growth DESC
+LIMIT 3;
+
+3. 
+SELECT c.Name AS country_name , c.SurfaceArea AS surface_area, cl.Language AS language, cl.isOfficial
+FROM country c 
+JOIN countrylanguage cl ON c.Code = cl.CountryCode 
+WHERE language = 'English' AND cl.isOfficial = 'T' 
+AND c.SurfaceArea > (SELECT AVG(SurfaceArea) FROM country WHERE Continent = 'Europe')
+LIMIT 4;

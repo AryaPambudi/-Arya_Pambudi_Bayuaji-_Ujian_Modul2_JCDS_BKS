@@ -1,0 +1,35 @@
+1. 
+SELECT * FROM city 
+WHERE CountryCode = 'USA'
+ORDER BY Population DESC
+LIMIT 10;
+
+2. 
+SELECT ci.id, ci.district, co.name AS country, ci.Population
+FROM city ci
+JOIN country co ON ci.CountryCode = co.Code
+ORDER BY Population DESC
+LIMIT 10;
+
+3. 
+SELECT c.Code, c.Name, cl.Language, cl.isOfficial, cl.Percentage
+FROM country c
+JOIN countrylanguage cl ON c.Code = cl.CountryCode
+WHERE cl.Language = 'English'
+ORDER BY cl.Percentage DESC
+LIMIT 10;
+
+4. 
+SELECT co.Name, co.Population, (co.GNP/co.Population) AS GNPperCapita, co.Capital AS Ibukota, ci.Population
+FROM city ci
+JOIN country co ON ci.CountryCode = co.Code
+WHERE co.Region = 'Southeast Asia'
+GROUP BY co.Name
+ORDER BY GNPperCapita DESC;
+
+5.
+SELECT Name, Continent, LifeExpectancy, GNP 
+FROM country
+WHERE Continent = 'Asia'
+ORDER BY LifeExpectancy DESC
+LIMIT 10;
